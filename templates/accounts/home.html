@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Pri Arantes{% endblock %}
+
+{% block content %}
+<div class="text-center">
+  <h1 class="display-5">Bem-vindo à plataforma!</h1>
+  <p class="lead">Você está logado como <strong>{{ user.email }}</strong></p>
+  <a href="#" class="btn btn-primary mt-3">Criar novo cultivo</a>
+  <a href="#" class="btn btn-outline-secondary mt-3">Ver meus cultivos</a>
+</div>
+{% endblock %}

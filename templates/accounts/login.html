@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load form_filters %}
+
+{% block title %}Pri Arantes - Entrar na Plataforma{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-body p-4">
+        <h2 class="card-title text-center mb-4">Entrar</h2>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {% if form.errors %}
+            <div class="alert alert-danger">
+              Verifique o e-mail e senha informados.
+            </div>
+          {% endif %}
+
+          <div class="mb-3">
+            <label for="id_username" class="form-label">E-mail</label>
+            {{ form.username|add_class:"form-control" }}
+          </div>
+
+          <div class="mb-3">
+            <label for="id_password" class="form-label">Senha</label>
+            {{ form.password|add_class:"form-control" }}
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Entrar</button>
+        </form>
+        <p class="text-center mt-3">
+          <small>Não tem conta? <a href="{% url 'register' %}">Registrar</a></small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
