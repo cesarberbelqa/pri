@@ -1,0 +1,93 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+db.sqlite3-journal
+
+# Media and static files
+media/
+staticfiles/
+static/
+
+# Django migrations
+**/migrations/
+
+# If you keep local settings or secrets files
+local_settings.py
+*.env
+.env.*
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# JetBrains IDEs
+*.iml
+*.iws
+*.ipr
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# celerybeat schedule file
+celerybeat-schedule
+
+# Sphinx documentation build
+docs/_build/
+
+# virtualenv
+*.env/
+*.venv/
+.env/
+.venv/
+
+# Static cache for collectstatic
+staticfiles/
+
+# dotenv environment variables file
+.env
+
+# pyenv
+.python-version
+
+# Unit test / coverage reports
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Django stuff: local SQLite database
+db.sqlite3
+
+# Django migrations (optional to ignore, but generally recommended)
+**/migrations/*.py
+**/migrations/*.pyc
+!**/migrations/__init__.py
