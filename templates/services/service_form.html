@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ form_title }} - Pri Arantes{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h3>{{ form_title }}</h3>
+        </div>
+        <div class="card-body">
+          <!-- O enctype é ESSENCIAL para upload de arquivos -->
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- 
+              Loop simplificado. 
+              Para cada campo no formulário, renderizamos o rótulo e o próprio campo.
+              O Django vai gerar o <input>, <select> ou <textarea> correto
+              e as classes do Bootstrap que definimos no forms.py serão aplicadas.
+            -->
+            {% for field in form %}
+              <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                
+                <!-- ESTA é a linha chave. Django renderiza o widget correto. -->
+                {{ field }}
+                
+                {% if field.help_text %}
+                  <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                  <div class="invalid-feedback d-block">{{ error }}</div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+
+            <div class="d-flex justify-content-end mt-4">
+              <a href="{% url 'services:list' %}" class="btn btn-secondary me-2">Cancelar</a>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

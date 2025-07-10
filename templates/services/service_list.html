@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Nossos Serviços - Pri Arantes{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="display-5">Nossos Serviços</h1>
+    {% if user.is_authenticated and user.is_staff %}
+      <a href="{% url 'services:create' %}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Adicionar Serviço
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="row g-4">
+    {% for service in services %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ service.imagem.url }}" class="card-img-top" alt="{{ service.titulo }}" style="height: 200px; object-fit: cover;">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ service.titulo }} <span class="badge bg-secondary">{{ service.get_categoria_display }}</span></h5>
+          <p class="card-text">{{ service.descricao|truncatewords:20 }}</p>
+          <div class="mt-auto">
+            <p class="mb-2"><strong>Duração:</strong> {{ service.duracao }} min</p>
+            <h4 class="text-primary">R$ {{ service.preco|floatformat:2 }}</h4>
+          </div>
+        </div>
+        {% if user.is_authenticated and user.is_staff %}
+        <div class="card-footer bg-light d-flex justify-content-end">
+          <a href="{% url 'services:update' service.pk %}" class="btn btn-sm btn-outline-info me-2">
+            <i class="fas fa-edit"></i> Editar
+          </a>
+          <a href="{% url 'services:delete' service.pk %}" class="btn btn-sm btn-outline-danger">
+            <i class="fas fa-trash"></i> Deletar
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% empty %}
+    <div class="col">
+      <p class="text-center">Nenhum serviço cadastrado no momento.</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

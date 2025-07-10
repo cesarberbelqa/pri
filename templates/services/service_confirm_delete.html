@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Deleção - Pri Arantes{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card border-danger shadow-sm">
+        <div class="card-header bg-danger text-white">
+          <h3>Confirmar Deleção</h3>
+        </div>
+        <div class="card-body">
+          <p class="lead">Você tem certeza que deseja deletar o serviço <strong>"{{ object.titulo }}"</strong>?</p>
+          <p>Esta ação não poderá ser desfeita. O serviço será marcado como inativo e não aparecerá mais na lista pública.</p>
+          
+          <form method="post">
+            {% csrf_token %}
+            <div class="d-flex justify-content-end mt-4">
+              <a href="{% url 'services:list' %}" class="btn btn-secondary me-2">Cancelar</a>
+              <button type="submit" class="btn btn-danger">Sim, tenho certeza</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

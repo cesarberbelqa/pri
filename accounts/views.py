@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.contrib import messages
+from testimonials.models import Testimonial
 
 class RegisterView(CreateView):
     form_class = CustomUserCreationForm
@@ -23,6 +24,18 @@ class CustomLoginView(LoginView):
     authentication_form = EmailAuthenticationForm
     template_name = 'accounts/login.html'
 
-@login_required
 def home(request):
-    return render(request, 'accounts/home.html')
+
+    # 2. Fetch 5 random, approved, and active testimonials
+    random_testimonials = Testimonial.objects.filter(
+        status=Testimonial.StatusChoices.APPROVED, 
+        is_active=True
+    ).order_by('?').values('name', 'body')[:5] # Using .values() for efficiency
+
+    # 3. Pass them to the template context
+    context = {
+        'testimonials': random_testimonials,
+        # ... other context variables for your home page
+    }
+    
+    return render(request, 'accounts/home.html', context) # Assumes your template is 'home.html'

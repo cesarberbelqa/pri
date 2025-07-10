@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Leave a Testimonial - Pri Arantes{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header">
+          <h3>{{ form_title }}</h3>
+        </div>
+        <div class="card-body">
+          <p class="text-muted">Share your experience with us! Your testimonial will be reviewed before being published.</p>
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex justify-content-end mt-4">
+              <button type="submit" class="btn btn-primary">Submit Testimonial</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
