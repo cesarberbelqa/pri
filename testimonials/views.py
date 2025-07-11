@@ -4,16 +4,16 @@ from .forms import TestimonialForm
 from .models import Testimonial
 
 class TestimonialCreateView(CreateView):
-    """View to handle the creation of a new testimonial."""
     model = Testimonial
     form_class = TestimonialForm
     template_name = 'testimonials/testimonial_form.html'
     success_url = reverse_lazy('testimonials:success')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form_title'] = 'Leave Your Testimonial'
-        return context
+    def form_valid(self, form):
+        # Passa o valor do checkbox para a instância do modelo antes de salvar
+        # Isso o torna acessível no sinal
+        form.instance.subscribe_to_newsletter = form.cleaned_data.get('subscribe_to_newsletter')
+        return super().form_valid(form)
 
 class TestimonialSuccessView(TemplateView):
     """Displays a thank you page after a successful submission."""

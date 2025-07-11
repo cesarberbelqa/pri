@@ -17,110 +17,83 @@
   </div>
 </section>
 
-<!-- Seção de Estatísticas com Contador Dinâmico -->
-<section id="estatisticas" class="stats-section bg-white">
-  <div class="container">
-    <h2 class="text-center mb-5">Saúde e Bem-Estar em Números</h2>
-    <div class="row text-center">
-      
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="counter-box">
-          <i class="fas fa-hand-holding-medical counter-icon"></i>
-          <span class="counter-value" data-target="1500">0</span><span>+</span>
-          <p class="counter-title">Unhas Desencravadas Tratadas</p>
-        </div>
-      </div>
-      
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="counter-box">
-          <i class="fas fa-shoe-prints counter-icon"></i>
-          <span class="counter-value" data-target="2200">0</span><span>+</span>
-          <p class="counter-title">Calos e Calosidades Removidos</p>
-        </div>
-      </div>
+<!-- Coloque este código no seu template da página inicial onde os serviços devem aparecer -->
 
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="counter-box">
-          <i class="fas fa-tint counter-icon"></i>
-          <span class="counter-value" data-target="1800">0</span><span>+</span>
-          <p class="counter-title">Pés Hidratados e Recuperados</p>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-sm-6 mb-4">
-        <div class="counter-box">
-          <i class="fas fa-smile counter-icon"></i>
-          <span class="counter-value" data-target="900">0</span><span>+</span>
-          <p class="counter-title">Clientes Satisfeitos</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Seção de Serviços com Carrossel -->
+{% if services %}
 <section id="servicos" class="py-5 bg-light">
   <div class="container">
-    <h2 class="text-center mb-5">Serviços Podológicos</h2>
+    <h2 class="text-center mb-4">Nossos Principais Serviços</h2>
     
-    <div id="servicosCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner text-center p-4">
-
-        <!-- Item 1: Calos -->
-        <div class="carousel-item active">
-          <i class="fas fa-shoe-prints fa-3x text-primary mb-3"></i>
-          <h3 class="mb-3">Tratamento de Calos e Calosidades</h3>
-          <p class="w-75 mx-auto">Removemos calos e calosidades de forma segura e indolor. Este tratamento alivia a dor causada pela pressão, devolvendo o conforto ao caminhar e prevenindo o reaparecimento com orientações de cuidado.</p>
-        </div>
-
-        <!-- Item 2: Unhas Encravadas -->
-        <div class="carousel-item">
-          <i class="fas fa-hand-holding-medical fa-3x text-primary mb-3"></i>
-          <h3 class="mb-3">Unhas Encravadas (Onicocriptose)</h3>
-          <p class="w-75 mx-auto">Realizamos o tratamento de unhas encravadas com técnicas profissionais para aliviar a dor e a inflamação imediatamente. O procedimento é feito com todo o cuidado para corrigir a curvatura da unha e evitar futuras complicações.</p>
-        </div>
-
-        <!-- Item 3: Hidratação e Fissuras -->
-        <div class="carousel-item">
-          <i class="fas fa-tint fa-3x text-primary mb-3"></i>
-          <h3 class="mb-3">Hidratação e Fissuras no Calcanhar</h3>
-          <p class="w-75 mx-auto">Tratamento intensivo para pés ressecados e calcanhares com fissuras. Utilizamos produtos específicos e técnicas de hidratação profunda que restauram a elasticidade da pele, proporcionando alívio e uma aparência saudável.</p>
-        </div>
-
-        <!-- Item 4: Micoses -->
-        <div class="carousel-item">
-          <i class="fas fa-shield-virus fa-3x text-primary mb-3"></i>
-          <h3 class="mb-3">Tratamento de Micoses</h3>
-          <p class="w-75 mx-auto">Oferecemos tratamento especializado para micoses de unha (onicomicose) e de pele. O procedimento visa eliminar o fungo causador da infecção, devolvendo a saúde e a estética das unhas e da pele dos seus pés.</p>
-        </div>
-
-        <!-- Item 5: Pés Diabéticos -->
-        <div class="carousel-item">
-          <i class="fas fa-heartbeat fa-3x text-primary mb-3"></i>
-          <h3 class="mb-3">Avaliação e Cuidados com Pés Diabéticos</h3>
-          <p class="w-75 mx-auto">Como enfermeira, ofereço uma avaliação minuciosa e cuidados preventivos essenciais para pés diabéticos. O objetivo é prevenir feridas, infecções e complicações graves, mantendo a integridade e saúde dos pés.</p>
-        </div>
-
-        <!-- Item 6: Laserterapia -->
-        <div class="carousel-item">
-          <i class="fas fa-magic fa-3x text-primary mb-3"></i>
-          <h3 class="mb-3">Tratamento com Laserterapia</h3>
-          <p class="w-75 mx-auto">Utilizamos a laserterapia de baixa intensidade, uma tecnologia moderna e eficaz para acelerar a cicatrização, reduzir a dor e a inflamação em casos de unhas encravadas, fissuras, micoses e outras patologias.</p>
-        </div>
-
+    <div id="serviceCarousel" class="carousel slide shadow-lg rounded" data-bs-ride="carousel">
+      
+      <!-- 1. Indicadores (as bolinhas embaixo) -->
+      <div class="carousel-indicators">
+        {% for service in services %}
+          <button 
+            type="button" 
+            data-bs-target="#serviceCarousel" 
+            data-bs-slide-to="{{ forloop.counter0 }}" 
+            class="{% if forloop.first %}active{% endif %}" 
+            aria-current="{% if forloop.first %}true{% endif %}" 
+            aria-label="Slide {{ forloop.counter }}">
+          </button>
+        {% endfor %}
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#servicosCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.3); border-radius: 50%;"></span>
+
+      <!-- 2. Slides do Carrossel -->
+      <div class="carousel-inner rounded">
+        {% for service in services %}
+          <!-- Cada 'carousel-item' é um slide -->
+          <div class="carousel-item {% if forloop.first %}active{% endif %}" data-bs-interval="5000">
+            
+            <img src="{{ service.imagem.url }}" class="d-block w-100 carousel-image-fixed" alt="{{ service.titulo }}">
+            
+            <!-- Legenda sobre a imagem (visível apenas em telas médias e maiores) -->
+            <div class="carousel-caption d-none d-md-block">
+              <h5>{{ service.titulo }}</h5>
+              <p>{{ service.descricao|truncatewords:15 }}</p>
+              <p class="mb-2"><strong>Preço:</strong> R$ {{ service.preco|floatformat:2 }} | <strong>Duração:</strong> {{ service.duracao }} min</p>
+              <a href="{% url 'services:list' %}" class="btn btn-primary btn-sm mt-1">Ver Todos os Serviços</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- 3. Controles (Setas de Próximo/Anterior) -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#serviceCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#servicosCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.3); border-radius: 50%;"></span>
+      <button class="carousel-control-next" type="button" data-bs-target="#serviceCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
+
   </div>
 </section>
+{% endif %}
+
+{% if result_section and result_cards %}
+<!-- Seção de Estatísticas com Contador Dinâmico -->
+<section id="estatisticas" class="stats-section bg-white">
+  <div class="container">
+    <h2 class="text-center mb-5">{{ result_section.title }}</h2>
+    <div class="row text-center">
+      {% for card in result_cards %}
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="counter-box">
+          <i class="fas fa-hand-holding-medical counter-icon"></i>
+          <span class="counter-value" data-target="{{ card.target_number }}">0</span><span>+</span>
+          <p class="counter-title">{{ card.title }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
 {% if testimonials %}
 <section id="testimonials" class="py-5 bg-light">
     <div class="container">
@@ -161,49 +134,4 @@
     </div>
   </div>
 </section>
-{% endblock %}
-
-
-{% block scripts %}
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const counters = document.querySelectorAll('.counter-value');
-  const speed = 200; // A velocidade da animação (ajuste conforme necessário)
-
-  const startCounter = (counter) => {
-    const target = +counter.getAttribute('data-target');
-    let count = 0;
-    
-    // Calcula o incremento para que todos terminem em tempo semelhante
-    const increment = target / speed;
-
-    const updateCount = () => {
-      if (count < target) {
-        count += increment;
-        counter.innerText = Math.ceil(count);
-        setTimeout(updateCount, 1);
-      } else {
-        counter.innerText = target;
-      }
-    };
-    updateCount();
-  };
-
-  // Usando Intersection Observer para iniciar a animação apenas quando visível
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        startCounter(entry.target);
-        observer.unobserve(entry.target); // Anima apenas uma vez
-      }
-    });
-  }, {
-    threshold: 0.5 // Inicia quando 50% do elemento está visível
-  });
-
-  counters.forEach(counter => {
-    observer.observe(counter);
-  });
-});
-</script>
 {% endblock %}
